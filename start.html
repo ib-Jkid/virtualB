@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <script src="Person.js"></script>
+    <script src="Bank.js"></script>
+    <script src="Casino.js"></script>
+    <script src="jquery.js"></script>
+    <script src="events.js"></script>
+    <script src="Assets.js"></script>
+    <script src="Crime.js"></script>
+    <script src="Station.js"></script>
+    <script src="Expenses.js"></script>
+    <script src="SoundPlay.js"></script>
+    <script src="Option.js"></script>
+    <script src="Update.js"></script>
+    <script src="Load.js"></script>
+    <script src="Job.js"></script>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+       
+        <script>
+                var int;
+                var name;
+                var man;
+                var bank;
+                var casino;
+                var assets;
+                var audio;
+                var load;
+                var gameOver = false;
+                var initialise = function (name) {
+                    this.name = name;
+                    expenses = new Expenses();
+                    crime = new Crime()
+                    station = new Station();
+                    man = new Person();
+                    bank = new Bank();
+                    casino = new Casino();
+                    assets = new Assets();
+                }
+                const main = function () {
+                    draw();
+                    load = new Load();
+                    
+                    
+                    
+                    
+                    int = setInterval(run,1000*30);
+                    
+                }
+                const run = function () {
+                    if(!gameOver) {
+                        Update.start();
+                    }else {
+                        clearInterval(int);
+                    }
+                        
+                }
+                const update = function () {
+                    if(arrested) {
+                        $("#crimeNotice").html("ARRESTED");
+                    }else {
+                        $("#crimeNotice").html("FREE");
+                    }
+                    if(bodyGuard) {
+                        $(".stationLeftDiv div button").html("HIRED");
+                    }else {
+                        $(".stationLeftDiv div button").html("HIRE");
+                    }
+                    if (thugs) {
+                        $("#hireThugButton").html("HIRED");
+                    }else {
+                        $("#hireThugButton").html("HIRE");
+                    }
+                    if(house) {
+                        $("#buyHouseButton").html("SOLD");
+                    }
+                    if(lawyer) {
+                        $("#hireLawyerButton").html("HIRED");
+                    }else {
+                        $("#hireLawyerButton").html("HIRE");
+                    }
+                    if(car) {
+                        $("#buyCarButton").html("SOLD");
+                    }
+                    $("#cashAtHand").html(Math.round(moneyAtHand));
+                    $("#bankAccountBalance").html(Math.round(accountBalance));
+                    $("#bankDept").html(Math.round(dept));
+                    $("#accumulatedIncome").html(accumulatedIncome);
+                    $("#incomeProgressBar").attr("value",accumulatedIncome);
+                    /////////////////////////////////
+                    $("#houseOwned").html(houseOwned);
+                    //$("#houseIncome").html(houseIncome);
+                    $("#houseCost").html(Math.round(houseCost));
+                    //////////////////////////////////
+                    $("#bankOwned").html(bankOwned);
+                   // $("#bankIncome").html(bankIncome);
+                    $("#bankCost").html(Math.round(bankCost));
+                    //////////////////////////////////
+                    $("#refineryOwned").html(refineryOwned);
+                    //$("#refineryIncome").html(refineryIncome);
+                    $("#refineryCost").html(Math.round(refineryCost));
+                    /////////////////////////////////
+                    $("#factoryOwned").html(factoryOwned);
+                    //$("#factoryIncome").html(factoryIncome);
+                    $("#factoryCost").html(Math.round(factoryCost));
+                    /////////////////////////////////////////
+                 }
+                var draw = function() {
+                    document.write("<div id='noticeBoard'>"+
+                        "<h1>header 1</h1>"+
+                        "<p>This is a test text</p>"+
+                        "</div>");
+                    document.write("<audio id='sound'></audio>");
+                    document.write("<audio id='bg' src='assets/bg.mp3' autoplay loop></audio>");
+                    audio = document.getElementById("sound");
+                    document.write("<div id = 'main'>");
+                        document.write("<div class='header'>");
+                            document.write("<marquee id='hint'>some random hint that changes</marquee>");
+                        document.write("</div>");
+                        document.write("<ul>");
+                            document.write("<button onclick='loadHome()'>HOME</button>");
+                            document.write("<button onclick = 'Bank.load()'>BANK</button>");
+                            document.write("<button onclick = 'Assets.load()'>ASSETS</button>");
+                            document.write("<button onclick = 'Casino.load()'>CASINO</button>");
+                            document.write("<button onclick = 'Crime.load()'>CRIME</button>");
+                            document.write("<button onclick = 'Station.load()'>STATION</button>");
+                            document.write("<button onclick = 'Expenses.load()'>EXPENSES</button>");
+                            document.write("<button onclick = 'Option.load()'>OPTIONS</button>");
+                            document.write("<button onclick = 'Job.load()'>JOB</button>");
+                            document.write("<button onclick = 'Load.save()'>test</button>");
+                        document.write("</ul>");
+                        document.write("<div class='top-bar'>");
+                            document.write("<p> Cash: $<span id='cashAtHand'></span><p>");
+                        document.write("</div>");
+                        document.write("<div id= 'content'>");
+                            
+                        document.write("</div>");
+
+
+                    document.write("</div>");
+                }
+                var loadHome = function () {
+                    $(document).ready (function () {
+                        var contentHtml = "<h1>the way</h1>";
+                        contentHtml += "<p>the p-tag of it all</p>";
+                        
+                        $("#content").html(contentHtml);
+                        console.log("done");
+                        
+                    })
+                }
+                main();
+                
+                
+                
+            
+        </script>
+</body>
+</html>
